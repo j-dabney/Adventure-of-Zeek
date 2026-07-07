@@ -11,13 +11,28 @@ config_version=5
 [application]
 
 config/name="Adventure of Zeek"
+config/description="An open-world 3D platformer revolving around Zeek (a rat) and his 4 brothers: Harvey, Polka, Querque, and Bob. "
+config/version="0.0.1"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+driver/enable_input=true
+
+[debug]
+
+settings/stdout/print_fps=true
+settings/stdout/print_gpu_profile=true
+settings/stdout/verbose_stdout=true
+file_logging/enable_file_logging=true
+file_logging/max_log_files=10
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [editor]
 
@@ -27,6 +42,7 @@ version_control/autoload_on_startup=true
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
