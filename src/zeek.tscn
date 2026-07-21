@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://be3xn3nxg56i6"]
+
+[ext_resource type="Script" uid="uid://cevyhgjvyjv86" path="res://src/zeek.gd" id="1_bhs16"]
+[ext_resource type="PackedScene" uid="uid://qa2bs7d05oqs" path="res://src/rat_model.tscn" id="1_tannv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_anp1u"]
+radius = 1.2954776
+
+[node name="Zeek" type="CharacterBody3D" unique_id=352147623]
+script = ExtResource("1_bhs16")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1139082291]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.3587129, 0)
+
+[node name="RatModel" parent="Pivot" unique_id=938423142 instance=ExtResource("1_tannv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1378472235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.842, 1.295, 0)
+shape = SubResource("SphereShape3D_anp1u")
