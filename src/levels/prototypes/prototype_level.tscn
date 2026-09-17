@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dyscwf07mw6he"]
 
+[ext_resource type="PackedScene" uid="uid://be3xn3nxg56i6" path="res://src/zeek.tscn" id="1_wh0d0"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_slkoe"]
 size = Vector3(50, 1, 50)
 
@@ -11,6 +13,12 @@ material = SubResource("StandardMaterial3D_anp1u")
 size = Vector3(50, 1, 50)
 
 [node name="PrototypeLevel" type="Node3D" unique_id=1786822586]
+
+[node name="CameraPivot" type="Marker3D" parent="." unique_id=319081902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3106594, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1771946718]
+transform = Transform3D(0.89499134, 0, 0.4460836, 0, 1, 0, -0.4460836, 0, 0.89499134, 1.9051809, 0, 2.222845)
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1377672281]
 
@@ -25,3 +33,5 @@ mesh = SubResource("BoxMesh_slkoe")
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=580188318]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Zeek" parent="." unique_id=352147623 instance=ExtResource("1_wh0d0")]

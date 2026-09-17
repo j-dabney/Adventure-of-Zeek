@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cpdailu8awe0y"]
+
+[ext_resource type="Script" uid="uid://db8f6tfisdid6" path="res://src/levels/test_level_01.gd" id="1_obnrq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_slkoe"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_anp1u"]
+size = Vector3(10, 0.2, 10)
+
+[node name="TestLevel01" type="Node3D" unique_id=1697653548]
+script = ExtResource("1_obnrq")
+
+[node name="Background" type="Node3D" parent="." unique_id=495628577]
+
+[node name="LevelObjects" type="Node3D" parent="." unique_id=1831070350]
+
+[node name="PlayerSpawn" type="Marker3D" parent="LevelObjects" unique_id=1622145256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="CameraPivot" type="Marker3D" parent="LevelObjects" unique_id=1758169854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="LevelObjects/CameraPivot" unique_id=443403158]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.7071067, 0.70710677, 0, -0.7071067, 0.70710677, 0, 1.5, 1.5)
+
+[node name="Environment" type="Node3D" parent="." unique_id=721648447]
+
+[node name="Sun" type="DirectionalLight3D" parent="Environment" unique_id=1295802449]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.4408436, 0)
+
+[node name="Terrain" type="Node3D" parent="." unique_id=1456488341]
+
+[node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1238257870]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Ground" unique_id=1157519986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_slkoe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground" unique_id=1349087395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_anp1u")

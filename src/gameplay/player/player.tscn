@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c4gq0kuava1mh"]
+
+[ext_resource type="Script" uid="uid://clfqafdjdo0us" path="res://src/gameplay/player/player.gd" id="1_kh5p4"]
+[ext_resource type="PackedScene" uid="uid://be3xn3nxg56i6" path="res://src/resources/playable_character_definitions/zeek.tscn" id="2_64h4j"]
+
+[node name="Player" type="Node3D" unique_id=828207087]
+script = ExtResource("1_kh5p4")
+
+[node name="Zeek" parent="." unique_id=352147623 instance=ExtResource("2_64h4j")]
