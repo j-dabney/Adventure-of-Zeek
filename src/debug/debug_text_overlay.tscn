@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cgieyklyfiwfy"]
+
+[ext_resource type="Script" uid="uid://sdluce3ddpk5" path="res://src/debug/debug_text_overlay.gd" id="1_jv051"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yl8a"]
+font_color = Color(0, 1, 0, 1)
+
+[node name="DebugTextOverlay" type="Control" unique_id=710315992]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jv051")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1967889606]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.975
+anchor_right = 0.025
+anchor_bottom = 1.0
+offset_top = -77.0
+offset_right = 49.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1578024028]
+layout_mode = 2
+
+[node name="FPSLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=779213867]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_6yl8a")
+
+[node name="VersionInfo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1460857402]
+unique_name_in_owner = true
+layout_mode = 2
+text = "DEV BUILD: "
+
+[node name="DebugInfo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1899792550]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Not Ready for Release"

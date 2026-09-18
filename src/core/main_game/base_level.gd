@@ -7,4 +7,4 @@ extends Node3D
 @abstract func get_default_player_spawn() -> Vector3
 
 ## Provides the camera used in the level
-@abstract func get_player_camera() -> Camera3D
+@abstract func get_player_camera() -> BaseCamera

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://gfhh7olfbrkb"]
 
 [ext_resource type="Script" uid="uid://dgtpvb7ic488b" path="res://src/core/main_game/main_game.gd" id="1_keldc"]
+[ext_resource type="PackedScene" uid="uid://cgieyklyfiwfy" path="res://src/debug/debug_text_overlay.tscn" id="2_6yl8a"]
 
 [node name="MainGame" type="Node" unique_id=220248326]
 process_mode = 3
@@ -64,7 +65,13 @@ layer = 128
 [node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=1264799410]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=710315992 instance=ExtResource("2_6yl8a")]
+layout_mode = 1
 mouse_filter = 2

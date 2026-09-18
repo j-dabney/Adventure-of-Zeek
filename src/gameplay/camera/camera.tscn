@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://n6qttjbn3myu"]
+
+[ext_resource type="Script" uid="uid://b5ux1r6ua15ji" path="res://src/gameplay/camera/camera_spring_arm.gd" id="1_kpfbt"]
+[ext_resource type="Script" uid="uid://dlaynilgq0ixo" path="res://src/gameplay/camera/camera_follow.gd" id="2_3f0f3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yl8a"]
+radius = 0.3
+
+[node name="SpringArmPivot" type="Node3D" unique_id=146536637]
+script = ExtResource("1_kpfbt")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=797942604 node_paths=PackedStringArray("spring_arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8876009)
+script = ExtResource("2_3f0f3")
+spring_arm = NodePath("../SpringArm3D/SpringPosition")
+lerp_power = 6.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1536791447]
+shape = SubResource("SphereShape3D_6yl8a")
+spring_length = 6.0
+
+[node name="SpringPosition" type="Node3D" parent="SpringArm3D" unique_id=914843193]

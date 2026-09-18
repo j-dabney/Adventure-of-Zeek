@@ -15,7 +15,7 @@ config/description="An RPG rogue-like revolving around Zeek (a rat) and his 4 br
 config/version="0.1.0"
 run/main_scene="uid://gfhh7olfbrkb"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://assets/art/ui/icons/icon.svg"
+config/icon="uid://bog23u4qg62jm"
 
 [audio]
 
@@ -114,6 +114,21 @@ debug_quit={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+zoom_in={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(190, 18),"global_position":Vector2(202, 78),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+zoom_out={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(175, 15),"global_position":Vector2(187, 75),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+toggle_mouse_capture={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -123,6 +138,7 @@ debug_quit={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Interactables"
 3d_physics/layer_4="Enemy"
+3d_physics/layer_5="Camera"
 
 [physics]
 

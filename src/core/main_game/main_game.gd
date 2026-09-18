@@ -32,6 +32,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed(&"debug_quit"):
+		print_orphan_nodes()
 		quit_game()
 
 ## Called for loading a level scene.
@@ -48,9 +49,8 @@ func _deferred_load_level(level_scene_uid : String) -> void:
 	if _current_level != null:
 		_current_level.queue_free()
 		_current_level = null
-	
-	# Allow the old level to finish freeing before adding the new one
-	await get_tree().process_frame
+		# Wait to allow the queued deletion to process so it is out of the scene tree
+		await get_tree().process_frame
 	
 	var new_level_packed : PackedScene =\
 		ResourceLoader.load(level_scene_uid, "PackedScene") as PackedScene
@@ -58,16 +58,22 @@ func _deferred_load_level(level_scene_uid : String) -> void:
 		push_error("Could not load level as a packed scene: " + level_scene_uid)
 		return
 	
-	_current_level = new_level_packed.instantiate() as BaseLevel
-	if _current_level == null:
-		push_error("Loaded level is not of type Level or does not exist")
+	var new_level : Node = new_level_packed.instantiate()
+	
+	if not new_level:
+		push_error("Could not instantiate new level " + level_scene_uid)
 		return
-		# FUTURE (main menu): Should have a fall back scene
+	
+	if not new_level is BaseLevel:
+		new_level.free() # Level must be removed from the tree
+		push_error("Loaded level is not of type BaseLevel " + level_scene_uid)
+		return
+	# FUTURE (main menu): Should have a fall back scene
+	
+	_current_level = new_level as BaseLevel
 	
 	level_root.add_child(_current_level)
 	
-	# Allow level to fully process before accessing it
-	await get_tree().process_frame
 	_place_player_at_level_spawn()
 	_setup_level_camera()
 
@@ -102,10 +108,11 @@ func _setup_level_camera() -> void:
 	if player == null or _current_level == null:
 		return
 	
-	var level_camera_pivot : Marker3D = _current_level.get_player_camera().get_parent_node_3d() as Marker3D
-	if level_camera_pivot == null:
+	var level_camera : BaseCamera = _current_level.get_player_camera()
+	if level_camera == null:
 		return
 	
 	# FUTURE (camera): Temporary hookup
 	# Will become: camera_system.set_target(player)
-	level_camera_pivot.position = player.position
+	level_camera.target = player
+	player.camera = level_camera
