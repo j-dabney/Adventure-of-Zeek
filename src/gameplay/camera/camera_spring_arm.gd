@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		var mouse_event : InputEventMouseMotion = event as InputEventMouseMotion
+		var mouse_event: InputEventMouseMotion = event as InputEventMouseMotion
 		if not mouse_event:
 			return
 

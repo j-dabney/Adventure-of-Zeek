@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayableCharacter" format=3 uid="uid://6ch8d1gpu174"]
+
+[ext_resource type="PackedScene" uid="uid://c4kwn1x4uxeqk" path="res://assets/art/characters/playable_characters/rat_model.tscn" id="1_1y1lb"]
+[ext_resource type="Script" uid="uid://klgf2175qcbe" path="res://src/resources/playable_character_definitions/playable_character.gd" id="2_gomli"]
+
+[resource]
+script = ExtResource("2_gomli")
+playable_character_scene = ExtResource("1_1y1lb")
+playable_character_name = "Zeek"
+speed = 14
+fall_acceleration = 75
+metadata/_custom_type_script = "uid://klgf2175qcbe"

@@ -7,7 +7,7 @@ extends Node
 ## Longer documentation goes here
 
 # signals
-signal something_happened(value : int)
+signal something_happened(value: int)
 
 # enums (PascalCase, members are CONSTANT_CASE)
 enum EnumName
@@ -17,19 +17,19 @@ enum EnumName
 }
 
 # constants (CONSTANT_CASE)
-const CONSTANT_VARIABLE : float = 19.84
+const CONSTANT_VARIABLE: float = 19.84
 
 # export-variables (snake_case)
-@export var exported_variable : float = 0.0
+@export var exported_variable: float = 0.0
 
 # public variables (non-underscore-prefixed snake_case)
-var is_a_public_variable : bool = false
+var is_a_public_variable: bool = false
 
 # private variables (underscore-prefixed _snake_case)
-var _this_is_private : bool = true
+var _this_is_private: bool = true
 
 # onready-variables (snake_case)
-@onready var on_ready_var : Sprite2D = $Sprite2D
+@onready var on_ready_var: Sprite2D = $Sprite2D
 
 # Optional built-in virtual methods
 # _init()
@@ -40,14 +40,14 @@ var _this_is_private : bool = true
 func _ready() -> void:
 	pass
 
-func _process(_delta : float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _physics_process(_delta: float) -> void:
 	pass
 
 # public methods (non-underscore-prefixed snake_case)
-func do_a_thing(the_thing : Thing) -> void:
+func do_a_thing(the_thing: Thing) -> void:
 	pass
 
 # private methods (underscore-prefixed _snake_case)

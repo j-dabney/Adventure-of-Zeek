@@ -1,10 +1,22 @@
 [gd_scene format=3 uid="uid://c4gq0kuava1mh"]
 
 [ext_resource type="Script" uid="uid://clfqafdjdo0us" path="res://src/gameplay/player/player.gd" id="1_kh5p4"]
-[ext_resource type="PackedScene" uid="uid://be3xn3nxg56i6" path="res://src/resources/playable_character_definitions/zeek.tscn" id="2_64h4j"]
+[ext_resource type="Resource" uid="uid://6ch8d1gpu174" path="res://src/resources/playable_character_definitions/zeek.tres" id="2_k2146"]
+[ext_resource type="PackedScene" uid="uid://n6qttjbn3myu" path="res://src/gameplay/camera/camera.tscn" id="3_d3trc"]
 
-[node name="Player" type="Node3D" unique_id=828207087]
+[sub_resource type="SphereShape3D" id="SphereShape3D_slkoe"]
+radius = 0.37575355
+
+[node name="Player" type="CharacterBody3D" unique_id=1495231583]
 script = ExtResource("1_kh5p4")
+character = ExtResource("2_k2146")
 
-[node name="Character" parent="." unique_id=352147623 instance=ExtResource("2_64h4j")]
+[node name="Camera" parent="." unique_id=146536637 node_paths=PackedStringArray("target") instance=ExtResource("3_d3trc")]
 top_level = true
+target = NodePath("..")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=829514818]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=855232463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46457714, 0)
+shape = SubResource("SphereShape3D_slkoe")

@@ -4,23 +4,23 @@ extends Node
 ## Responsible for setting up the World Layers and coordinating high-level systems.
 
 # FUTURE (main menu): Load test level for prototype
-const TEST_LEVEL_01    : String = "uid://cpdailu8awe0y"
-const PLAYER_SCENE_UID : String = "uid://c4gq0kuava1mh"
+const TEST_LEVEL_01: String = "uid://cpdailu8awe0y"
+const PLAYER_SCENE_UID: String = "uid://c4gq0kuava1mh"
 
-var player         : Player = null
+var player: Player = null
 
-var _current_level : BaseLevel = null
+var _current_level: BaseLevel = null
 
 # Game World root nodes
-@onready var level_root  : Node3D = %LevelRoot
-@onready var entity_root : Node3D = %EntityRoot
-@onready var effect_root : Node3D = %EffectRoot
+@onready var level_root: Node3D = %LevelRoot
+@onready var entity_root: Node3D = %EntityRoot
+@onready var effect_root: Node3D = %EffectRoot
 
 # UI Root Nodes (FUTURE)
-@onready var hud_root        : Control = %HUDRoot
-@onready var pause_root      : Control = %PauseRoot
-@onready var transition_root : Control = %TransitionRoot
-@onready var debug_root      : Control = %DebugRoot
+@onready var hud_root: Control = %HUDRoot
+@onready var pause_root: Control = %PauseRoot
+@onready var transition_root: Control = %TransitionRoot
+@onready var debug_root: Control = %DebugRoot
 
 func _ready() -> void:
 	_init_player()
@@ -37,7 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Called for loading a level scene.
 ## NOTE: The input level_scene must extend BaseLevel
-func load_level(level_scene : String) -> void:
+func load_level(level_scene: String) -> void:
 	# Make sure this is called during idle time
 	_deferred_load_level.call_deferred(level_scene)
 
@@ -45,20 +45,20 @@ func quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
 
-func _deferred_load_level(level_scene_uid : String) -> void:
+func _deferred_load_level(level_scene_uid: String) -> void:
 	if _current_level != null:
 		_current_level.queue_free()
 		_current_level = null
 		# Wait to allow the queued deletion to process so it is out of the scene tree
 		await get_tree().process_frame
 	
-	var new_level_packed : PackedScene =\
+	var new_level_packed: PackedScene =\
 		ResourceLoader.load(level_scene_uid, "PackedScene") as PackedScene
 	if new_level_packed == null:
 		push_error("Could not load level as a packed scene: " + level_scene_uid)
 		return
 	
-	var new_level : Node = new_level_packed.instantiate()
+	var new_level: Node = new_level_packed.instantiate()
 	
 	if not new_level:
 		push_error("Could not instantiate new level " + level_scene_uid)
@@ -75,11 +75,11 @@ func _deferred_load_level(level_scene_uid : String) -> void:
 	level_root.add_child(_current_level)
 	
 	_place_player_at_level_spawn()
-	_setup_level_camera()
+	# _setup_level_camera()
 
 # Instantiates the player and adds it to the entity layer
 func _init_player() -> void:
-	var player_scene : PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
+	var player_scene: PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
 	if player_scene == null:
 		push_error("Could not load player scene: " + PLAYER_SCENE_UID)
 		return
@@ -108,7 +108,7 @@ func _setup_level_camera() -> void:
 	if player == null or _current_level == null:
 		return
 	
-	var level_camera : BaseCamera = _current_level.get_player_camera()
+	var level_camera: BaseCamera = _current_level.get_player_camera()
 	if level_camera == null:
 		return
 	

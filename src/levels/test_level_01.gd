@@ -1,7 +1,7 @@
 extends BaseLevel
 
-@onready var player_spawn : Marker3D = $LevelObjects/PlayerSpawn
-@onready var player_camera : BaseCamera = $LevelObjects/PlayerCamera
+@onready var player_spawn: Marker3D = $LevelObjects/PlayerSpawn
+@onready var player_camera: BaseCamera = $LevelObjects/PlayerCamera
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
