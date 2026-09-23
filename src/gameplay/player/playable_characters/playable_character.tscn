@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b1s0i14350527"]
+
+[ext_resource type="Script" uid="uid://klgf2175qcbe" path="res://src/gameplay/player/playable_characters/playable_character.gd" id="1_arm4k"]
+[ext_resource type="PackedScene" uid="uid://c4kwn1x4uxeqk" path="res://assets/visual/characters/playable_characters/rat_model.tscn" id="1_uh3er"]
+[ext_resource type="PackedScene" uid="uid://c4gq0kuava1mh" path="res://src/gameplay/player/player_input_controller.tscn" id="4_8m0rj"]
+
+[node name="PlayableCharacter" type="CharacterBody3D" unique_id=495654861]
+script = ExtResource("1_arm4k")
+
+[node name="Asset" parent="." unique_id=1859952656 instance=ExtResource("1_uh3er")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=174856465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32283187, -0.15891536)
+
+[node name="PlayerInputController" parent="." unique_id=1904263302 node_paths=PackedStringArray("character") instance=ExtResource("4_8m0rj")]
+character = NodePath("..")

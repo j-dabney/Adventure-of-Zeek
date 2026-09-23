@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c4gq0kuava1mh"]
+
+[ext_resource type="Script" uid="uid://clfqafdjdo0us" path="res://src/gameplay/player/player_input_controller.gd" id="1_kh5p4"]
+
+[node name="PlayerInputController" type="Node3D" unique_id=1904263302 node_paths=PackedStringArray("character")]
+script = ExtResource("1_kh5p4")
+character = NodePath("")

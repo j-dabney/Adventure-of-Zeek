@@ -5,9 +5,9 @@ extends Node
 
 # FUTURE (main menu): Load test level for prototype
 const TEST_LEVEL_01: String = "uid://cpdailu8awe0y"
-const PLAYER_SCENE_UID: String = "uid://c4gq0kuava1mh"
+const PLAYER_SCENE_UID: String = "uid://8hq4a58bvy0d"
 
-var player: Player = null
+var player: PlayableCharacter = null
 
 var _current_level: BaseLevel = null
 
@@ -75,7 +75,7 @@ func _deferred_load_level(level_scene_uid: String) -> void:
 	level_root.add_child(_current_level)
 	
 	_place_player_at_level_spawn()
-	# _setup_level_camera()
+	_setup_level_camera()
 
 # Instantiates the player and adds it to the entity layer
 func _init_player() -> void:
@@ -84,7 +84,7 @@ func _init_player() -> void:
 		push_error("Could not load player scene: " + PLAYER_SCENE_UID)
 		return
 	
-	player = player_scene.instantiate() as Player
+	player = player_scene.instantiate() as PlayableCharacter
 	if player == null:
 		push_error("Loaded player scene does not extend player or DNE: " + PLAYER_SCENE_UID)
 		return

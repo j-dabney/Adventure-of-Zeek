@@ -16,10 +16,11 @@ script = ExtResource("1_obnrq")
 
 [node name="LevelObjects" type="Node3D" parent="." unique_id=1831070350]
 
+[node name="PlayerCamera" parent="LevelObjects" unique_id=146536637 instance=ExtResource("2_gilss")]
+top_level = true
+
 [node name="PlayerSpawn" type="Marker3D" parent="LevelObjects" unique_id=1622145256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-
-[node name="PlayerCamera" parent="LevelObjects" unique_id=146536637 instance=ExtResource("2_gilss")]
 
 [node name="Environment" type="Node3D" parent="." unique_id=721648447]
 

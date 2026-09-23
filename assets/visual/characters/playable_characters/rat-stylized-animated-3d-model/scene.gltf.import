@@ -4,16 +4,16 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://gs8lr1fj7hss"
-path="res://.godot/imported/scene.gltf-d6fb05ab0a6ec5d711d4456f3a6c4af3.scn"
+path="res://.godot/imported/scene.gltf-4b9c6d5300781884c8777b1e6972a000.scn"
 
 [deps]
 
-source_file="res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/scene.gltf"
-dest_files=["res://.godot/imported/scene.gltf-d6fb05ab0a6ec5d711d4456f3a6c4af3.scn"]
+source_file="res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/scene.gltf"
+dest_files=["res://.godot/imported/scene.gltf-4b9c6d5300781884c8777b1e6972a000.scn"]
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/root_script=null
 mesh_library/use_node_names_as_mesh_names=false
@@ -43,7 +43,7 @@ _subresources={
 "animations": {
 "RatAll_AlertRun": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_AlertRun.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_AlertRun.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://bvlmgqri5ojth",
 "settings/loop_mode": 0,
@@ -2099,7 +2099,7 @@ _subresources={
 },
 "RatAll_Clean": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Clean.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Clean.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://dnuvowlsu4yho",
 "settings/loop_mode": 1,
@@ -4155,7 +4155,7 @@ _subresources={
 },
 "RatAll_Eat": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Eat.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Eat.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://105sl65xxpuu",
 "settings/loop_mode": 1,
@@ -6211,7 +6211,7 @@ _subresources={
 },
 "RatAll_Itch": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Itch.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Itch.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://dxstqytoqu4rt",
 "settings/loop_mode": 1,
@@ -8267,7 +8267,7 @@ _subresources={
 },
 "RatAll_Scamper": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Scamper.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Scamper.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://d03t6vuj045ot",
 "settings/loop_mode": 1,
@@ -10323,7 +10323,7 @@ _subresources={
 },
 "RatAll_Trottle": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Trottle.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/RatAll_Trottle.res",
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "uid://wy5fp5wrmoh0",
 "settings/loop_mode": 1,
@@ -12385,7 +12385,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/art/characters/playable_characters/rat-stylized-animated-3d-model/Sketchfab_Scene_U3DMesh_CH_Rat_0.res",
+"save_to_file/fallback_path": "res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/Sketchfab_Scene_U3DMesh_CH_Rat_0.res",
 "save_to_file/path": "uid://bw05jhnowrbow"
 }
 }

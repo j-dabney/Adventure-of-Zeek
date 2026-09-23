@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://dyscwf07mw6he"]
 
-[ext_resource type="PackedScene" uid="uid://be3xn3nxg56i6" path="res://src/zeek.tscn" id="1_wh0d0"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_slkoe"]
 size = Vector3(50, 1, 50)
 
@@ -33,5 +31,3 @@ mesh = SubResource("BoxMesh_slkoe")
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=580188318]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 0, 0)
 shadow_enabled = true
-
-[node name="Zeek" parent="." unique_id=352147623 instance=ExtResource("1_wh0d0")]
