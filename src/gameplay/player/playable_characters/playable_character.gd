@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var camera: BaseCamera
 @export var animation_player: AnimationPlayer
 @export var state_machine: StateMachine
+@export var model: Node3D
 
 var target_velocity: Vector3 = Vector3.ZERO
 

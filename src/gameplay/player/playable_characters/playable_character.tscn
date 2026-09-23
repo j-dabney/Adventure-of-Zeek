@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://c4kwn1x4uxeqk" path="res://assets/visual/characters/playable_characters/rat_model.tscn" id="1_uh3er"]
 [ext_resource type="PackedScene" uid="uid://c4gq0kuava1mh" path="res://src/gameplay/player/player_input_controller.tscn" id="4_8m0rj"]
 [ext_resource type="Script" uid="uid://8kodjegbjeta" path="res://src/core/state_machine/state_machine.gd" id="4_kv7ld"]
-[ext_resource type="Script" uid="uid://bksw7syhgt05b" path="res://src/gameplay/player/playable_characters/idle.gd" id="5_ipj2d"]
-[ext_resource type="Script" uid="uid://c3oj400216po7" path="res://src/gameplay/player/playable_characters/walking.gd" id="6_665it"]
-[ext_resource type="Script" uid="uid://6bmf7o6766fj" path="res://src/gameplay/player/playable_characters/falling.gd" id="7_jqwax"]
+[ext_resource type="Script" uid="uid://bksw7syhgt05b" path="res://src/gameplay/player/playable_characters/states/idle.gd" id="5_ipj2d"]
+[ext_resource type="Script" uid="uid://c3oj400216po7" path="res://src/gameplay/player/playable_characters/states/walking.gd" id="6_665it"]
+[ext_resource type="Script" uid="uid://6bmf7o6766fj" path="res://src/gameplay/player/playable_characters/states/falling.gd" id="7_jqwax"]
 
-[node name="PlayableCharacter" type="CharacterBody3D" unique_id=495654861 node_paths=PackedStringArray("state_machine")]
+[node name="PlayableCharacter" type="CharacterBody3D" unique_id=495654861 node_paths=PackedStringArray("state_machine", "model")]
 script = ExtResource("1_arm4k")
 state_machine = NodePath("StateMachine")
+model = NodePath("Asset")
 
 [node name="Asset" parent="." unique_id=1859952656 instance=ExtResource("1_uh3er")]
 

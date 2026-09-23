@@ -3,7 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://gs8lr1fj7hss" path="res://assets/visual/characters/playable_characters/rat-stylized-animated-3d-model/scene.gltf" id="1_qwwgk"]
 
 [node name="Asset" unique_id=1859952656 instance=ExtResource("1_qwwgk")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Sketchfab_model" parent="." index="0" unique_id=335376309]
+transform = Transform3D(-5.7792196, -5.0523545e-07, 2.2084543e-14, 0, -2.5261772e-07, -5.7792196, 5.0523545e-07, -5.7792196, 2.5261772e-07, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Sketchfab_model/4866d0eadadf4021aa8b93f13c62d610_fbx/Object_2/RootNode/Object_4" parent_id_path=PackedInt32Array(688870036) index="0" unique_id=1425456102]
 bones/3/position = Vector3(0.1931302, 10.98727, 4.201402)

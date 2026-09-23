@@ -19,5 +19,8 @@ func move(direction: Vector3) -> void:
 	if player.camera:
 		direction = direction.rotated(Vector3.UP, player.camera.global_rotation.y)
 	
-	player.target_velocity.x = direction.x * player.playable_character_resource.base_speed
-	player.target_velocity.z = direction.z * player.playable_character_resource.base_speed
+	if direction != Vector3.ZERO:
+		player.model.basis = Basis.looking_at(direction)
+	
+	player.target_velocity.x = direction.x * player.playable_character_resource.base_walk_speed
+	player.target_velocity.z = direction.z * player.playable_character_resource.base_walk_speed
