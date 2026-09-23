@@ -1,10 +1,5 @@
 extends PlayerState
 
-func enter(previous_state_path: String, data := {}) -> void:
-	player.velocity.x = 0.0
-	player.velocity.z = 0.0
-	player.animation_player.play("RatAll_Clean")
-
 func physics_update(_delta: float) -> void:
 	if not player.is_on_floor(): # If in the air, fall towards the floor.
 		player.target_velocity.y = player.target_velocity.y - (player.playable_character_resource.base_fall_acceleration * _delta)
@@ -17,6 +12,11 @@ func physics_update(_delta: float) -> void:
 		finished.emit(FALLING)
 	elif player.velocity != Vector3.ZERO:
 		finished.emit(WALKING)
+
+func enter(previous_state_path: String, data := {}) -> void:
+	player.velocity.x = 0.0
+	player.velocity.z = 0.0
+	player.animation_player.play("RatAll_Clean")
 
 func move(direction: Vector3) -> void:
 	if direction != Vector3.ZERO:

@@ -45,6 +45,20 @@ func quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
 
+# Instantiates the player and adds it to the entity layer
+func _init_player() -> void:
+	var player_scene: PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
+	if player_scene == null:
+		push_error("Could not load player scene: " + PLAYER_SCENE_UID)
+		return
+	
+	player = player_scene.instantiate() as PlayableCharacter
+	if player == null:
+		push_error("Loaded player scene does not extend player or DNE: " + PLAYER_SCENE_UID)
+		return
+	
+	entity_root.add_child(player)
+
 func _deferred_load_level(level_scene_uid: String) -> void:
 	if _current_level != null:
 		_current_level.queue_free()
@@ -76,20 +90,6 @@ func _deferred_load_level(level_scene_uid: String) -> void:
 	
 	_place_player_at_level_spawn()
 	_setup_level_camera()
-
-# Instantiates the player and adds it to the entity layer
-func _init_player() -> void:
-	var player_scene: PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
-	if player_scene == null:
-		push_error("Could not load player scene: " + PLAYER_SCENE_UID)
-		return
-	
-	player = player_scene.instantiate() as PlayableCharacter
-	if player == null:
-		push_error("Loaded player scene does not extend player or DNE: " + PLAYER_SCENE_UID)
-		return
-	
-	entity_root.add_child(player)
 
 ## Finds the default spawn location in currently loaded level, and places
 ## the Player at that position.
