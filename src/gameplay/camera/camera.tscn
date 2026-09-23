@@ -6,7 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_6yl8a"]
 radius = 0.3
 
-[node name="SpringArmPivot" type="Node3D" unique_id=146536637]
+[node name="BaseCamera" type="Node3D" unique_id=146536637]
 script = ExtResource("1_kpfbt")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=797942604 node_paths=PackedStringArray("spring_arm")]

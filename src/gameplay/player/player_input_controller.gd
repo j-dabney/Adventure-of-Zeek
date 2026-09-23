@@ -18,4 +18,4 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
 	
-	character.move(direction)
+	character.state_machine.state.move(direction)
