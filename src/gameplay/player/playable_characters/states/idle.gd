@@ -7,7 +7,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(_delta: float) -> void:
 	if not player.is_on_floor(): # If in the air, fall towards the floor.
-		player.target_velocity.y = player.target_velocity.y - (player.playable_character_resource.fall_acceleration * _delta)
+		player.target_velocity.y = player.target_velocity.y - (player.playable_character_resource.base_fall_acceleration * _delta)
 		
 	player.velocity = player.target_velocity
 	@warning_ignore("return_value_discarded")
@@ -25,5 +25,5 @@ func move(direction: Vector3) -> void:
 	if player.camera:
 		direction = direction.rotated(Vector3.UP, player.camera.global_rotation.y)
 	
-	player.target_velocity.x = direction.x * (player.playable_character_resource.speed + 100)
-	player.target_velocity.z = direction.z * (player.playable_character_resource.speed + 100)
+	player.target_velocity.x = direction.x * (player.playable_character_resource.base_speed + 100)
+	player.target_velocity.z = direction.z * (player.playable_character_resource.base_speed + 100)
