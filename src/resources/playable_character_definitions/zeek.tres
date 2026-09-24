@@ -11,4 +11,5 @@ base_shield = 50
 base_walk_speed = 14
 base_sprint_speed = 20
 base_fall_acceleration = 75
+base_jump_impulse = 20
 metadata/_custom_type_script = "uid://dn264u6q8aj7a"

@@ -10,3 +10,4 @@ extends Resource
 @export var base_walk_speed: int
 @export var base_sprint_speed: int
 @export var base_fall_acceleration: int
+@export var base_jump_impulse: int
