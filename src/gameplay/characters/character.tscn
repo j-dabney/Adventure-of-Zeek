@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b1s0i14350527"]
+
+[ext_resource type="Script" uid="uid://klgf2175qcbe" path="res://src/gameplay/characters/character.gd" id="1_arm4k"]
+[ext_resource type="PackedScene" uid="uid://prh35jb6tjtd" path="res://addons/gdquest_sophia/sophia_skin.tscn" id="2_kv7ld"]
+[ext_resource type="Resource" uid="uid://51hywi8liqcc" path="res://src/resources/character_definitions/prototype_stats.tres" id="2_vaduh"]
+[ext_resource type="Script" uid="uid://6uxkcnb0ddal" path="res://src/gameplay/player/player_input_controller.gd" id="3_kv7ld"]
+[ext_resource type="Script" uid="uid://8kodjegbjeta" path="res://src/core/state_machine/state_machine.gd" id="4_kv7ld"]
+[ext_resource type="Script" uid="uid://bksw7syhgt05b" path="res://src/gameplay/characters/states/movement/idle.gd" id="5_ipj2d"]
+[ext_resource type="Script" uid="uid://c3oj400216po7" path="res://src/gameplay/characters/states/movement/sprinting.gd" id="6_665it"]
+[ext_resource type="Script" uid="uid://6bmf7o6766fj" path="res://src/gameplay/characters/states/movement/falling.gd" id="7_jqwax"]
+[ext_resource type="Script" uid="uid://rp5sngaywfdn" path="res://src/gameplay/characters/states/movement/jumping.gd" id="9_665it"]
+[ext_resource type="Script" uid="uid://b1ikbb368mxnj" path="res://src/gameplay/characters/states/attack/idle_attack.gd" id="10_63tao"]
+[ext_resource type="Script" uid="uid://bxi0ltatpm03k" path="res://src/gameplay/characters/states/attack/primary_attack.gd" id="11_el2mp"]
+[ext_resource type="Script" uid="uid://beeerl0pej32k" path="res://src/gameplay/characters/states/attack/secondary_attack.gd" id="12_75mx8"]
+[ext_resource type="Script" uid="uid://b8lt26prsmpet" path="res://src/gameplay/characters/states/attack/utility_attack.gd" id="13_sc3y7"]
+[ext_resource type="Script" uid="uid://hrstuvmbswdg" path="res://src/gameplay/characters/states/attack/special_attack.gd" id="14_gupar"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_slkoe"]
+radius = 0.30322266
+
+[node name="Character" type="CharacterBody3D" unique_id=495654861 node_paths=PackedStringArray("movement_state_machine", "attack_state_machine", "character_scene", "input_controller")]
+collision_layer = 2
+script = ExtResource("1_arm4k")
+stats = ExtResource("2_vaduh")
+movement_state_machine = NodePath("MovementStateMachine")
+attack_state_machine = NodePath("AttackStateMachine")
+character_scene = NodePath("CharacterScene")
+input_controller = NodePath("CharacterController")
+
+[node name="CharacterScene" parent="." unique_id=558452309 instance=ExtResource("2_kv7ld")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=174856465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9975096, 0)
+shape = SubResource("CapsuleShape3D_slkoe")
+
+[node name="CharacterController" type="Node" parent="." unique_id=1716837234 node_paths=PackedStringArray("character")]
+script = ExtResource("3_kv7ld")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://clfqafdjdo0us"
+
+[node name="MovementStateMachine" type="Node" parent="." unique_id=1724685968 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_kv7ld")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MovementStateMachine" unique_id=2107022464]
+script = ExtResource("5_ipj2d")
+
+[node name="Sprinting" type="Node" parent="MovementStateMachine" unique_id=215778117]
+script = ExtResource("6_665it")
+
+[node name="Falling" type="Node" parent="MovementStateMachine" unique_id=923479190]
+script = ExtResource("7_jqwax")
+
+[node name="Jumping" type="Node" parent="MovementStateMachine" unique_id=822993594]
+script = ExtResource("9_665it")
+metadata/_custom_type_script = "uid://dyd5b74h4rshr"
+
+[node name="AttackStateMachine" type="Node" parent="." unique_id=1901417090 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_kv7ld")
+initial_state = NodePath("IdleAttack")
+
+[node name="IdleAttack" type="Node" parent="AttackStateMachine" unique_id=1945725544]
+script = ExtResource("10_63tao")
+metadata/_custom_type_script = "uid://37xhys1o85a7"
+
+[node name="PrimaryAttack" type="Node" parent="AttackStateMachine" unique_id=1255298735]
+script = ExtResource("11_el2mp")
+metadata/_custom_type_script = "uid://37xhys1o85a7"
+
+[node name="SecondaryAttack" type="Node" parent="AttackStateMachine" unique_id=1935070783]
+script = ExtResource("12_75mx8")
+metadata/_custom_type_script = "uid://37xhys1o85a7"
+
+[node name="UtilityAttack" type="Node" parent="AttackStateMachine" unique_id=1367038821]
+script = ExtResource("13_sc3y7")
+metadata/_custom_type_script = "uid://37xhys1o85a7"
+
+[node name="SpecialAttack" type="Node" parent="AttackStateMachine" unique_id=426937364]
+script = ExtResource("14_gupar")
+metadata/_custom_type_script = "uid://37xhys1o85a7"

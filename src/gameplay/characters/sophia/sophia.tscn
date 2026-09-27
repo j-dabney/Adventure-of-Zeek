@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c3uadmgsesnmw"]
+
+[ext_resource type="PackedScene" uid="uid://b1s0i14350527" path="res://src/gameplay/characters/character.tscn" id="1_08w64"]
+[ext_resource type="Script" uid="uid://cpa48bl5b3n14" path="res://src/gameplay/stats/stats.gd" id="2_rks0s"]
+
+[sub_resource type="Resource" id="Resource_d63ei"]
+resource_local_to_scene = true
+script = ExtResource("2_rks0s")
+name = "Prototype"
+base_max_health = 100
+base_max_shield = 100
+base_attack = 10
+base_defense = 10
+base_sprint_speed = 14
+base_fall_acceleration = 12
+base_jump_impulse = 20
+metadata/_custom_type_script = "uid://cpa48bl5b3n14"
+
+[node name="PlayableCharacter" unique_id=495654861 instance=ExtResource("1_08w64")]
+stats = SubResource("Resource_d63ei")

@@ -12,6 +12,7 @@ extends Node
 func _ready() -> void:
 	# Give every state a reference to the state machine.
 	for state_node: State in find_children("*", "State"):
+		@warning_ignore("return_value_discarded")
 		state_node.finished.connect(_transition_to_next_state)
 
 	# State machines usually access data from the root node of the scene they're part of: the owner.
@@ -33,7 +34,7 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
 
-	var previous_state_path := state.name
+	var previous_state_path: StringName = state.name
 	state.exit()
 	state = get_node(target_state_path)
 	state.enter(previous_state_path, data)
