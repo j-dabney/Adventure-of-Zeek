@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://v0iblyybygr4"]
+
+[ext_resource type="Script" uid="uid://klgf2175qcbe" path="res://src/gameplay/characters/character.gd" id="1_md2wn"]
+[ext_resource type="Resource" uid="uid://b7sswtyoufvsj" path="res://src/resources/enemy_definitions/bee.tres" id="2_md2wn"]
+[ext_resource type="PackedScene" uid="uid://482rxnrhe64v" path="res://addons/gdquest_bee_bot/bee_bot_skin.tscn" id="3_md2wn"]
+[ext_resource type="Script" uid="uid://c3hvu33vr3u1t" path="res://src/gameplay/enemies/ai_input_controller.gd" id="4_265t5"]
+[ext_resource type="Script" uid="uid://8kodjegbjeta" path="res://src/core/state_machine/state_machine.gd" id="5_takgk"]
+[ext_resource type="Script" uid="uid://cf7pn7shffr0i" path="res://src/gameplay/characters/bee/states/movement/bee_idle.gd" id="6_md2wn"]
+[ext_resource type="Script" uid="uid://dioycjq1ta4p6" path="res://src/gameplay/characters/bee/states/movement/bee_sprinting.gd" id="7_265t5"]
+[ext_resource type="Script" uid="uid://gprx5s4ehvyd" path="res://src/gameplay/characters/bee/states/movement/bee_falling.gd" id="8_6em6t"]
+[ext_resource type="Script" uid="uid://bs2djm5rqehoo" path="res://src/gameplay/characters/bee/states/movement/bee_jumping.gd" id="9_takgk"]
+[ext_resource type="Script" uid="uid://cruyemivby24j" path="res://src/gameplay/characters/bee/states/attack/bee_idle_attack.gd" id="10_jefkc"]
+[ext_resource type="Script" uid="uid://5me185vk00ng" path="res://src/gameplay/characters/bee/states/attack/bee_primary_attack.gd" id="11_nqxix"]
+[ext_resource type="Script" uid="uid://db850jh0n5ily" path="res://src/gameplay/characters/bee/states/attack/bee_secondary_attack.gd" id="12_iibct"]
+[ext_resource type="Script" uid="uid://b2rrs3856avux" path="res://src/gameplay/characters/bee/states/attack/bee_utility_attack.gd" id="13_5qg32"]
+[ext_resource type="Script" uid="uid://eo8aiyy8v47" path="res://src/gameplay/characters/bee/states/attack/bee_special_attack.gd" id="14_gw1yy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_slkoe"]
+radius = 0.27762333
+
+[node name="Bee" type="CharacterBody3D" unique_id=495654861 node_paths=PackedStringArray("movement_state_machine", "attack_state_machine", "character_scene", "input_controller")]
+collision_layer = 2
+script = ExtResource("1_md2wn")
+stats = ExtResource("2_md2wn")
+movement_state_machine = NodePath("MovementStateMachine")
+attack_state_machine = NodePath("AttackStateMachine")
+character_scene = NodePath("CharacterScene")
+input_controller = NodePath("CharacterController")
+
+[node name="CharacterScene" parent="." unique_id=1885522340 instance=ExtResource("3_md2wn")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=413681556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19019134, 0)
+shape = SubResource("SphereShape3D_slkoe")
+
+[node name="CharacterController" type="Node" parent="." unique_id=1716837234 node_paths=PackedStringArray("parent", "character")]
+script = ExtResource("4_265t5")
+parent = NodePath("..")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://clfqafdjdo0us"
+
+[node name="MovementStateMachine" type="Node" parent="." unique_id=1724685968 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_takgk")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="MovementStateMachine" unique_id=2107022464]
+script = ExtResource("6_md2wn")
+
+[node name="Sprinting" type="Node" parent="MovementStateMachine" unique_id=215778117]
+script = ExtResource("7_265t5")
+
+[node name="Falling" type="Node" parent="MovementStateMachine" unique_id=923479190]
+script = ExtResource("8_6em6t")
+
+[node name="Jumping" type="Node" parent="MovementStateMachine" unique_id=373915947]
+script = ExtResource("9_takgk")
+
+[node name="AttackStateMachine" type="Node" parent="." unique_id=1901417090 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_takgk")
+initial_state = NodePath("IdleAttack")
+
+[node name="IdleAttack" type="Node" parent="AttackStateMachine" unique_id=365386286]
+script = ExtResource("10_jefkc")
+
+[node name="PrimaryAttack" type="Node" parent="AttackStateMachine" unique_id=327070831]
+script = ExtResource("11_nqxix")
+
+[node name="SecondaryAttack" type="Node" parent="AttackStateMachine" unique_id=1424821077]
+script = ExtResource("12_iibct")
+
+[node name="UtilityAttack" type="Node" parent="AttackStateMachine" unique_id=1165155015]
+script = ExtResource("13_5qg32")
+
+[node name="SpecialAttack" type="Node" parent="AttackStateMachine" unique_id=549717443]
+script = ExtResource("14_gw1yy")

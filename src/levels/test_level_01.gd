@@ -2,6 +2,7 @@ extends BaseLevel
 
 @onready var player_spawn: Marker3D = $LevelObjects/PlayerSpawn
 @onready var player_camera: BaseCamera = $LevelObjects/PlayerCamera
+@onready var enemy_spawn: Marker3D = $LevelObjects/EnemySpawn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,3 +19,6 @@ func get_default_player_spawn() -> Vector3:
 ## Provides the camera used in the level
 func get_player_camera() -> BaseCamera:
 	return player_camera
+
+func get_default_enemy_spawn() -> Vector3:
+	return enemy_spawn.global_position

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://b7sswtyoufvsj"]
+
+[ext_resource type="Script" uid="uid://cpa48bl5b3n14" path="res://src/gameplay/stats/stats.gd" id="1_rgxq0"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_rgxq0")
+name = "Bee"
+description = "Prototype enemy"
+base_max_health = 10
+base_attack = 5
+base_defense = 5
+base_sprint_speed = 7
+base_fall_acceleration = 30
+base_jump_impulse = 20
+metadata/_custom_type_script = "uid://cpa48bl5b3n14"

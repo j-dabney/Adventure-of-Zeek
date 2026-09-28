@@ -1,4 +1,4 @@
-class_name MovementState
+class_name BeeMovementState
 extends State
 
 const IDLE: String = "Idle"

@@ -1,4 +1,4 @@
-extends MovementState
+extends SophiaMovementState
 
 func physics_update(delta: float) -> void:
 	if not character.is_on_floor(): # If in the air, fall towards the floor.
@@ -18,6 +18,5 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	target_velocity = character.velocity
 	target_velocity.y = character.stats.current_jump_impulse
 	
-	# Play animation if one exists
 	@warning_ignore("unsafe_method_access")
 	character.character_scene.jump()

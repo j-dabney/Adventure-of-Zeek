@@ -1,4 +1,4 @@
-extends AttackState
+extends BeeAttackState
 
 var timer: float
 
@@ -13,4 +13,4 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	# Play animation if one exists
 	
 	timer = 0.5
-	print("Primary Attack was used!")
+	print("Special Attack was used!")

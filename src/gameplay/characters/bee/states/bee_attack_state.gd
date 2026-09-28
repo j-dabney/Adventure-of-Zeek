@@ -1,4 +1,4 @@
-class_name AttackState
+class_name BeeAttackState
 extends State
 
 const IDLE: String = "IdleAttack"

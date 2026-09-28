@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://pymcrujtba88"]
+
+[ext_resource type="Script" uid="uid://m74l48crebhl" path="res://src/debug/debug_menu.gd" id="1_t2fp8"]
+
+[node name="DebugMenu" type="Control" unique_id=56293652]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t2fp8")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1986563570]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="PauseGame" type="CheckButton" parent="MarginContainer" unique_id=884147338]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_behavior_recursive = 2
+text = "Pause Game: "
+
+[connection signal="toggled" from="MarginContainer/PauseGame" to="." method="_on_pause_game_toggled"]

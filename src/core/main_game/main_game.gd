@@ -5,9 +5,11 @@ extends Node
 
 # FUTURE (main menu): Load test level for prototype
 const TEST_LEVEL_01: String = "uid://cpdailu8awe0y"
-const PLAYER_SCENE_UID: String = "uid://b1s0i14350527"
+const PLAYER_SCENE_UID: String = "uid://c3uadmgsesnmw"
+const ENEMY_SCENE_UID: String = "uid://v0iblyybygr4"
 
 var player: Character = null
+var enemy: Character = null
 
 var _current_level: BaseLevel = null
 
@@ -24,6 +26,7 @@ var _current_level: BaseLevel = null
 
 func _ready() -> void:
 	_init_player()
+	_init_enemy()
 	
 	load_level(TEST_LEVEL_01)
 
@@ -90,6 +93,7 @@ func _deferred_load_level(level_scene_uid: String) -> void:
 	
 	_place_player_at_level_spawn()
 	_setup_level_camera()
+	_place_enemy_at_level_spawn()
 
 ## Finds the default spawn location in currently loaded level, and places
 ## the Player at that position.
@@ -102,6 +106,9 @@ func _place_player_at_level_spawn() -> void:
 		return
 	
 	player.global_position = _current_level.get_default_player_spawn()
+	# FUTURE (Player HUD): Make this not dumb
+	var player_hud: HealthBar = $HUDLayer/HUDRoot/PlayerHUD/MarginContainer/Health
+	player_hud.player = player
 
 ## Attaches player to the current camera as the camera pivot position
 func _setup_level_camera() -> void:
@@ -116,3 +123,27 @@ func _setup_level_camera() -> void:
 	# Will become: camera_system.set_target(player)
 	level_camera.target = player
 	player.camera = level_camera
+
+func _init_enemy() -> void:
+	var enemy_scene: PackedScene = ResourceLoader.load(ENEMY_SCENE_UID) as PackedScene
+	if enemy_scene == null:
+		push_error("Could not load enemy scene: " + ENEMY_SCENE_UID)
+		return
+	
+	enemy = enemy_scene.instantiate() as Character
+	if enemy == null:
+		push_error("Loaded enemy scene does not extend character or DNE: " + ENEMY_SCENE_UID)
+		return
+	
+	entity_root.add_child(enemy)
+
+func _place_enemy_at_level_spawn() -> void:
+	if enemy == null:
+		push_error("Cannot place enemy in level because enemy is null")
+		return
+	if _current_level == null:
+		push_error("Cannot place enemy into level because level is null")
+		return
+	
+	enemy.global_position = _current_level.get_default_enemy_spawn()
+	(enemy.input_controller as AIInputController).target = player

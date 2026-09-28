@@ -1,4 +1,4 @@
-extends AttackState
+extends BeeAttackState
 
 func physics_update(_delta: float) -> void:
 	if character_controller.wants_primary_attack():
@@ -12,6 +12,4 @@ func physics_update(_delta: float) -> void:
 
 @warning_ignore("inferred_declaration")
 func enter(_previous_state_path: String, _data := {}) -> void:
-	# Play animation if one exists
-	
-	print("No attack is being used.")
+	pass

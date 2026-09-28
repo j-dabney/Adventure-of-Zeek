@@ -18,14 +18,12 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_slkoe"]
 radius = 0.30322266
 
-[node name="Character" type="CharacterBody3D" unique_id=495654861 node_paths=PackedStringArray("movement_state_machine", "attack_state_machine", "character_scene", "input_controller")]
+[node name="Character" type="CharacterBody3D" unique_id=495654861 node_paths=PackedStringArray("movement_state_machine", "attack_state_machine")]
 collision_layer = 2
 script = ExtResource("1_arm4k")
 stats = ExtResource("2_vaduh")
 movement_state_machine = NodePath("MovementStateMachine")
 attack_state_machine = NodePath("AttackStateMachine")
-character_scene = NodePath("CharacterScene")
-input_controller = NodePath("CharacterController")
 
 [node name="CharacterScene" parent="." unique_id=558452309 instance=ExtResource("2_kv7ld")]
 

@@ -1,4 +1,4 @@
-extends MovementState
+extends BeeMovementState
 
 var direction: Vector3
 
@@ -31,6 +31,5 @@ func physics_update(delta: float) -> void:
 func enter(_previous_state_path: String, _data := {}) -> void:
 	direction = character_controller.get_movement_direction()
 	
-	# Play animation if one exists
 	@warning_ignore("unsafe_method_access")
-	character.character_scene.move()
+	character.character_scene.idle()
