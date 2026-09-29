@@ -107,7 +107,7 @@ func _place_player_at_level_spawn() -> void:
 	
 	player.global_position = _current_level.get_default_player_spawn()
 	# FUTURE (Player HUD): Make this not dumb
-	var player_hud: HealthBar = $HUDLayer/HUDRoot/PlayerHUD/MarginContainer/Health
+	var player_hud: HealthBar = $HUDLayer/HUDRoot/PlayerHUD/Health/HealthBar
 	player_hud.player = player
 
 ## Attaches player to the current camera as the camera pivot position

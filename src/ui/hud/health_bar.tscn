@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://12pipxasjfvy"]
 
 [ext_resource type="Texture2D" uid="uid://ch360a2d0dipq" path="res://assets/visual/ui/healthbarUnder.png" id="1_1t7b1"]
+[ext_resource type="Script" uid="uid://cxvvy3qbdgch1" path="res://src/ui/hud/game_time.gd" id="1_3r42n"]
 [ext_resource type="Texture2D" uid="uid://bqqmgl4ed0kse" path="res://assets/visual/ui/healthbarProgress.png" id="2_3d670"]
 [ext_resource type="Script" uid="uid://hl2nk2xlygtg" path="res://src/ui/hud/health_bar.gd" id="3_3d670"]
 
@@ -11,8 +12,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1102774853]
+[node name="Time" type="MarginContainer" parent="." unique_id=891283]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = 40.0
+grow_horizontal = 0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="Timer" type="Timer" parent="Time" unique_id=1391496423]
+autostart = true
+
+[node name="Label" type="Label" parent="Time" unique_id=249416991 node_paths=PackedStringArray("timer")]
+layout_mode = 2
+script = ExtResource("1_3r42n")
+timer = NodePath("../Timer")
+
+[node name="Health" type="MarginContainer" parent="." unique_id=1102774853]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -23,8 +47,10 @@ offset_right = -25.0
 offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
-[node name="Health" type="TextureProgressBar" parent="MarginContainer" unique_id=1552599467]
+[node name="HealthBar" type="TextureProgressBar" parent="Health" unique_id=1552599467]
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 size_flags_vertical = 8
@@ -33,3 +59,5 @@ nine_patch_stretch = true
 texture_under = ExtResource("1_1t7b1")
 texture_progress = ExtResource("2_3d670")
 script = ExtResource("3_3d670")
+
+[connection signal="timeout" from="Time/Timer" to="Time/Label" method="on_timer_timeout"]
