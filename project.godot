@@ -24,6 +24,7 @@ driver/enable_input=true
 [autoload]
 
 ThreadedLoader="*uid://c2iulrbaf28ic"
+SceneLoader="*uid://uwvmbyxfu8vg"
 
 [debug]
 

@@ -1,5 +1,6 @@
 extends Node
 
+var use_sub_threads: bool = true
 var _active_load_requests: Dictionary = {}
 
 func _process(_delta: float) -> void:
@@ -44,7 +45,7 @@ func load_async(resource_path: String, on_load_finished: Callable, on_progress_u
 		return
 
 	if not _active_load_requests.has(resource_path):
-		var error_code: Error = ResourceLoader.load_threaded_request(resource_path, "", true)
+		var error_code: Error = ResourceLoader.load_threaded_request(resource_path, "", use_sub_threads)
 		if error_code != OK:
 			printerr("ThreadedLoader: Thread request error for: ", resource_path)
 			on_load_finished.call(null)
