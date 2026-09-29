@@ -5,7 +5,6 @@ extends Node
 
 # FUTURE (main menu): Load test level for prototype
 
-var player: Character = null
 var enemy: Character = null
 
 # Game World root nodes
@@ -20,8 +19,6 @@ var enemy: Character = null
 @onready var debug_root: Control = %DebugRoot
 
 func _ready() -> void:
-	_init_player()
-	_init_enemy()
 	RootNodes.level_root = level_root
 	RootNodes.entity_root = entity_root
 	RootNodes.effect_root = effect_root
@@ -29,11 +26,13 @@ func _ready() -> void:
 	RootNodes.pause_root = pause_root
 	RootNodes.transition_root = transition_root
 	RootNodes.debug_root = debug_root
+	PlayerManager.init()
+	_init_enemy()
 	
 	await LevelLoader.load_level(SceneUIDs.SCENE_UIDS.test_level_01)
 	await LevelLoader.load_finished
 	
-	_place_player_at_level_spawn.call_deferred()
+	PlayerManager.place_player_at_level_spawn()
 	_setup_level_camera.call_deferred()
 	_place_enemy_at_level_spawn.call_deferred()
 
@@ -49,38 +48,9 @@ func quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
 
-# Instantiates the player and adds it to the entity layer
-func _init_player() -> void:
-	var player_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.player_scene_uid) as PackedScene
-	if player_scene == null:
-		push_error("Could not load player scene: " + SceneUIDs.SCENE_UIDS.player_scene_uid)
-		return
-	
-	player = player_scene.instantiate() as Character
-	if player == null:
-		push_error("Loaded player scene does not extend player or DNE: " + SceneUIDs.SCENE_UIDS.player_scene_uid)
-		return
-	
-	entity_root.add_child(player)
-
-## Finds the default spawn location in currently loaded level, and places
-## the Player at that position.
-func _place_player_at_level_spawn() -> void:
-	if player == null:
-		push_error("Cannot place player in level because player is null")
-		return
-	if LevelLoader.current_level == null:
-		push_error("Cannot place player into level because level is null")
-		return
-	
-	player.global_position = LevelLoader.current_level.get_default_player_spawn()
-	# FUTURE (Player HUD): Make this not dumb
-	var player_hud: HealthBar = $HUDLayer/HUDRoot/PlayerHUD/Health/HealthBar
-	player_hud.player = player
-
 ## Attaches player to the current camera as the camera pivot position
 func _setup_level_camera() -> void:
-	if player == null or LevelLoader.current_level == null:
+	if PlayerManager.player == null or LevelLoader.current_level == null:
 		return
 	
 	var level_camera: BaseCamera = LevelLoader.current_level.get_player_camera()
@@ -89,8 +59,8 @@ func _setup_level_camera() -> void:
 	
 	# FUTURE (camera): Temporary hookup
 	# Will become: camera_system.set_target(player)
-	level_camera.target = player
-	player.camera = level_camera
+	level_camera.target = PlayerManager.player
+	PlayerManager.player.camera = level_camera
 
 func _init_enemy() -> void:
 	var enemy_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.enemy_scene_uid) as PackedScene
@@ -114,4 +84,4 @@ func _place_enemy_at_level_spawn() -> void:
 		return
 	
 	enemy.global_position = LevelLoader.current_level.get_default_enemy_spawn()
-	(enemy.input_controller as AIInputController).target = player
+	(enemy.input_controller as AIInputController).target = PlayerManager.player

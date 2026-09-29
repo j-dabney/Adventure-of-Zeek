@@ -1,25 +1,16 @@
 class_name HealthBar
 extends TextureProgressBar
 
-@export var player: Character
-
-func _process(_delta: float) -> void:
-	if not player:
-		return
-	if not visible and player:
-		visible = true
-	
-	max_value = player.stats.current_max_health
-	value = player.stats.health
-
 func _ready() -> void:
-	init.call_deferred()
-	
-	if not player:
-		visible = false
+	visible = false
+	PlayerManager.player_spawned.connect(_on_player_spawned)
 
-func init() -> void:
-	if not player:
-		return
-	max_value = player.stats.current_max_health
-	value = player.stats.health
+func _on_player_spawned() -> void:
+	max_value = PlayerManager.player.stats.current_max_health
+	value = PlayerManager.player.stats.health
+	PlayerManager.player.stats.health_changed.connect(_on_health_changed)
+	visible = true
+
+func _on_health_changed() -> void:
+	max_value = PlayerManager.player.stats.current_max_health
+	value = PlayerManager.player.stats.health
