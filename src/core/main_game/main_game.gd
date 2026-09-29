@@ -4,9 +4,6 @@ extends Node
 ## Responsible for setting up the World Layers and coordinating high-level systems.
 
 # FUTURE (main menu): Load test level for prototype
-const TEST_LEVEL_01: String = "uid://cpdailu8awe0y"
-const PLAYER_SCENE_UID: String = "uid://c3uadmgsesnmw"
-const ENEMY_SCENE_UID: String = "uid://v0iblyybygr4"
 
 var player: Character = null
 var enemy: Character = null
@@ -33,7 +30,7 @@ func _ready() -> void:
 	RootNodes.transition_root = transition_root
 	RootNodes.debug_root = debug_root
 	
-	await LevelLoader.load_level(TEST_LEVEL_01)
+	await LevelLoader.load_level(SceneUIDs.SCENE_UIDS.test_level_01)
 	await LevelLoader.load_finished
 	
 	_place_player_at_level_spawn.call_deferred()
@@ -54,14 +51,14 @@ func quit_game() -> void:
 
 # Instantiates the player and adds it to the entity layer
 func _init_player() -> void:
-	var player_scene: PackedScene = ResourceLoader.load(PLAYER_SCENE_UID) as PackedScene
+	var player_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.player_scene_uid) as PackedScene
 	if player_scene == null:
-		push_error("Could not load player scene: " + PLAYER_SCENE_UID)
+		push_error("Could not load player scene: " + SceneUIDs.SCENE_UIDS.player_scene_uid)
 		return
 	
 	player = player_scene.instantiate() as Character
 	if player == null:
-		push_error("Loaded player scene does not extend player or DNE: " + PLAYER_SCENE_UID)
+		push_error("Loaded player scene does not extend player or DNE: " + SceneUIDs.SCENE_UIDS.player_scene_uid)
 		return
 	
 	entity_root.add_child(player)
@@ -96,14 +93,14 @@ func _setup_level_camera() -> void:
 	player.camera = level_camera
 
 func _init_enemy() -> void:
-	var enemy_scene: PackedScene = ResourceLoader.load(ENEMY_SCENE_UID) as PackedScene
+	var enemy_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.enemy_scene_uid) as PackedScene
 	if enemy_scene == null:
-		push_error("Could not load enemy scene: " + ENEMY_SCENE_UID)
+		push_error("Could not load enemy scene: " + SceneUIDs.SCENE_UIDS.enemy_scene_uid)
 		return
 	
 	enemy = enemy_scene.instantiate() as Character
 	if enemy == null:
-		push_error("Loaded enemy scene does not extend character or DNE: " + ENEMY_SCENE_UID)
+		push_error("Loaded enemy scene does not extend character or DNE: " + SceneUIDs.SCENE_UIDS.enemy_scene_uid)
 		return
 	
 	entity_root.add_child(enemy)
