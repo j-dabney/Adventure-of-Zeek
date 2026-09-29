@@ -11,8 +11,6 @@ const ENEMY_SCENE_UID: String = "uid://v0iblyybygr4"
 var player: Character = null
 var enemy: Character = null
 
-var _current_level: BaseLevel = null
-
 # Game World root nodes
 @onready var level_root: Node3D = %LevelRoot
 @onready var entity_root: Node3D = %EntityRoot
@@ -27,8 +25,20 @@ var _current_level: BaseLevel = null
 func _ready() -> void:
 	_init_player()
 	_init_enemy()
+	RootNodes.level_root = level_root
+	RootNodes.entity_root = entity_root
+	RootNodes.effect_root = effect_root
+	RootNodes.hud_root = hud_root
+	RootNodes.pause_root = pause_root
+	RootNodes.transition_root = transition_root
+	RootNodes.debug_root = debug_root
 	
-	load_level(TEST_LEVEL_01)
+	await LevelLoader.load_level(TEST_LEVEL_01)
+	await LevelLoader.load_finished
+	
+	_place_player_at_level_spawn.call_deferred()
+	_setup_level_camera.call_deferred()
+	_place_enemy_at_level_spawn.call_deferred()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
@@ -37,12 +47,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"debug_quit"):
 		print_orphan_nodes()
 		quit_game()
-
-## Called for loading a level scene.
-## NOTE: The input level_scene must extend BaseLevel
-func load_level(level_scene: String) -> void:
-	# Make sure this is called during idle time
-	_deferred_load_level.call_deferred(level_scene)
 
 func quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
@@ -62,60 +66,27 @@ func _init_player() -> void:
 	
 	entity_root.add_child(player)
 
-func _deferred_load_level(level_scene_uid: String) -> void:
-	if _current_level != null:
-		_current_level.queue_free()
-		_current_level = null
-		# Wait to allow the queued deletion to process so it is out of the scene tree
-		await get_tree().process_frame
-	
-	var new_level_packed: PackedScene =\
-		ResourceLoader.load(level_scene_uid, "PackedScene") as PackedScene
-	if new_level_packed == null:
-		push_error("Could not load level as a packed scene: " + level_scene_uid)
-		return
-	
-	var new_level: Node = new_level_packed.instantiate()
-	
-	if not new_level:
-		push_error("Could not instantiate new level " + level_scene_uid)
-		return
-	
-	if not new_level is BaseLevel:
-		new_level.free() # Level must be removed from the tree
-		push_error("Loaded level is not of type BaseLevel " + level_scene_uid)
-		return
-	# FUTURE (main menu): Should have a fall back scene
-	
-	_current_level = new_level as BaseLevel
-	
-	level_root.add_child(_current_level)
-	
-	_place_player_at_level_spawn()
-	_setup_level_camera()
-	_place_enemy_at_level_spawn()
-
 ## Finds the default spawn location in currently loaded level, and places
 ## the Player at that position.
 func _place_player_at_level_spawn() -> void:
 	if player == null:
 		push_error("Cannot place player in level because player is null")
 		return
-	if _current_level == null:
+	if LevelLoader.current_level == null:
 		push_error("Cannot place player into level because level is null")
 		return
 	
-	player.global_position = _current_level.get_default_player_spawn()
+	player.global_position = LevelLoader.current_level.get_default_player_spawn()
 	# FUTURE (Player HUD): Make this not dumb
 	var player_hud: HealthBar = $HUDLayer/HUDRoot/PlayerHUD/Health/HealthBar
 	player_hud.player = player
 
 ## Attaches player to the current camera as the camera pivot position
 func _setup_level_camera() -> void:
-	if player == null or _current_level == null:
+	if player == null or LevelLoader.current_level == null:
 		return
 	
-	var level_camera: BaseCamera = _current_level.get_player_camera()
+	var level_camera: BaseCamera = LevelLoader.current_level.get_player_camera()
 	if level_camera == null:
 		return
 	
@@ -141,9 +112,9 @@ func _place_enemy_at_level_spawn() -> void:
 	if enemy == null:
 		push_error("Cannot place enemy in level because enemy is null")
 		return
-	if _current_level == null:
+	if LevelLoader.current_level == null:
 		push_error("Cannot place enemy into level because level is null")
 		return
 	
-	enemy.global_position = _current_level.get_default_enemy_spawn()
+	enemy.global_position = LevelLoader.current_level.get_default_enemy_spawn()
 	(enemy.input_controller as AIInputController).target = player

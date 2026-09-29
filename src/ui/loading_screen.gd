@@ -1,3 +1,4 @@
+class_name LoadingScreen
 extends Control
 
 signal loading_screen_ready
