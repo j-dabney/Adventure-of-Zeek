@@ -21,6 +21,10 @@ config/icon="uid://bog23u4qg62jm"
 
 driver/enable_input=true
 
+[autoload]
+
+ThreadedLoader="*uid://c2iulrbaf28ic"
+
 [debug]
 
 settings/stdout/verbose_stdout=true
