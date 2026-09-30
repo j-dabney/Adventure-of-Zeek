@@ -1,4 +1,4 @@
-class_name BaseCamera
+class_name PivotCamera
 extends Node3D
 
 @export var mouse_sensibility: float = 0.005

@@ -6,8 +6,5 @@ extends Node3D
 ## Provides a player spawn location
 @abstract func get_default_player_spawn() -> Vector3
 
-## Provides the camera used in the level
-@abstract func get_player_camera() -> BaseCamera
-
 ## Provides an enemy spawn location
 @abstract func get_default_enemy_spawn() -> Vector3

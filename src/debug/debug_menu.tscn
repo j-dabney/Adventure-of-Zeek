@@ -20,10 +20,20 @@ anchor_right = 1.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="PauseGame" type="CheckButton" parent="MarginContainer" unique_id=884147338]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1791974932]
+layout_mode = 2
+
+[node name="PauseGame" type="CheckButton" parent="MarginContainer/VBoxContainer" unique_id=884147338]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_behavior_recursive = 2
 text = "Pause Game: "
 
-[connection signal="toggled" from="MarginContainer/PauseGame" to="." method="_on_pause_game_toggled"]
+[node name="FlyCamera" type="CheckButton" parent="MarginContainer/VBoxContainer" unique_id=340702378]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_behavior_recursive = 2
+text = "Fly Camera: "
+
+[connection signal="toggled" from="MarginContainer/VBoxContainer/PauseGame" to="." method="_on_pause_game_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/FlyCamera" to="." method="_on_fly_camera_toggled"]

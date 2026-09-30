@@ -28,12 +28,13 @@ func _ready() -> void:
 	RootNodes.debug_root = debug_root
 	PlayerManager.init()
 	_init_enemy()
+	CameraManager.init()
 	
 	await LevelLoader.load_level(SceneUIDs.SCENE_UIDS.test_level_01)
 	await LevelLoader.load_finished
 	
 	PlayerManager.place_player_at_level_spawn()
-	_setup_level_camera.call_deferred()
+	CameraManager.setup_player_camera()
 	_place_enemy_at_level_spawn.call_deferred()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -47,20 +48,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
-
-## Attaches player to the current camera as the camera pivot position
-func _setup_level_camera() -> void:
-	if PlayerManager.player == null or LevelLoader.current_level == null:
-		return
-	
-	var level_camera: BaseCamera = LevelLoader.current_level.get_player_camera()
-	if level_camera == null:
-		return
-	
-	# FUTURE (camera): Temporary hookup
-	# Will become: camera_system.set_target(player)
-	level_camera.target = PlayerManager.player
-	PlayerManager.player.camera = level_camera
 
 func _init_enemy() -> void:
 	var enemy_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.enemy_scene_uid) as PackedScene

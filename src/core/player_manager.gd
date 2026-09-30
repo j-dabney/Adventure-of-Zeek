@@ -3,7 +3,7 @@ extends Node
 signal player_spawned
 
 var player: Character
-var player_input_controller: PlayerInputController
+var player_input_controller: Node
 
 func init() -> void:
 	var player_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.player_scene_uid) as PackedScene
@@ -21,6 +21,8 @@ func init() -> void:
 		return
 	
 	RootNodes.entity_root.add_child(player)
+	
+	player_input_controller = player.input_controller
 
 ## Finds the default spawn location in currently loaded level, and places
 ## the Player at that position.

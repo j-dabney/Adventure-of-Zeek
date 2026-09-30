@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dmrrn5lx66tvr"]
+
+[ext_resource type="Script" uid="uid://bv50oqqxfqxvc" path="res://src/gameplay/camera/fly_camera.gd" id="1_dvjua"]
+
+[node name="FlyCamera" type="Camera3D" unique_id=58765178]
+current = true
+script = ExtResource("1_dvjua")

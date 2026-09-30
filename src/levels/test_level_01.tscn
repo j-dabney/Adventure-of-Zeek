@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cpdailu8awe0y"]
 
 [ext_resource type="Script" uid="uid://db8f6tfisdid6" path="res://src/levels/test_level_01.gd" id="1_obnrq"]
-[ext_resource type="PackedScene" uid="uid://n6qttjbn3myu" path="res://src/gameplay/camera/camera.tscn" id="2_gilss"]
 [ext_resource type="Texture2D" uid="uid://ci51uvhrtvp5s" path="res://addons/kenney_prototype_textures/light/texture_08.png" id="3_ig8ra"]
 [ext_resource type="Texture2D" uid="uid://cokvldn06u5a5" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="4_uores"]
 
@@ -39,9 +38,6 @@ script = ExtResource("1_obnrq")
 [node name="Background" type="Node3D" parent="." unique_id=495628577]
 
 [node name="LevelObjects" type="Node3D" parent="." unique_id=1831070350]
-
-[node name="PlayerCamera" parent="LevelObjects" unique_id=146536637 instance=ExtResource("2_gilss")]
-top_level = true
 
 [node name="PlayerSpawn" type="Marker3D" parent="LevelObjects" unique_id=1622145256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

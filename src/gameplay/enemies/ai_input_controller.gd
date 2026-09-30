@@ -5,6 +5,11 @@ extends CharacterController
 @export var parent: Character
 var direction: Vector3
 
+func _ready() -> void:
+	@warning_ignore("return_value_discarded")
+	PlayerManager.player_spawned.connect(_on_player_spawned)
+	target = PlayerManager.player
+
 func get_movement_direction() -> Vector3:
 	if not target:
 		return Vector3.ZERO
@@ -27,3 +32,6 @@ func wants_utility_attack() -> bool:
 
 func wants_special_attack() -> bool:
 	return false
+	
+func _on_player_spawned() -> void:
+	target = PlayerManager.player

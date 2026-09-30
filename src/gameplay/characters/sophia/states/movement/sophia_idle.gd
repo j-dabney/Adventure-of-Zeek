@@ -8,6 +8,8 @@ func physics_update(_delta: float) -> void:
 	@warning_ignore("return_value_discarded")
 	character.move_and_slide()
 	
+	if not character.camera:
+		return
 	if not character.is_on_floor():
 		finished.emit(FALLING)
 	if character_controller.wants_jump() and character.is_on_floor():

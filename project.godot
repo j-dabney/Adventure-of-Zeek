@@ -28,6 +28,7 @@ LevelLoader="*uid://uwvmbyxfu8vg"
 RootNodes="*uid://csmur0mbvf12w"
 SceneUIDs="*uid://b86nhfy474cmr"
 PlayerManager="*uid://c0whfr2qng8ic"
+CameraManager="*uid://ddce0f7b141t8"
 
 [debug]
 

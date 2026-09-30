@@ -1,6 +1,8 @@
 extends SophiaAttackState
 
 func physics_update(_delta: float) -> void:
+	if not character.camera:
+		return
 	if character_controller.wants_primary_attack():
 		finished.emit(PRIMARY)
 	elif character_controller.wants_secondary_attack():
