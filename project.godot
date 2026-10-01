@@ -29,6 +29,7 @@ SceneUIDs="*uid://b86nhfy474cmr"
 PlayerManager="*uid://c0whfr2qng8ic"
 CameraManager="*uid://ddce0f7b141t8"
 DebugManager="*uid://b5j7rn5d73dix"
+EnemyManager="*uid://bs1wu35vlwbtw"
 
 [debug]
 

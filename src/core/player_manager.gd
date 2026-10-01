@@ -2,8 +2,8 @@ extends Node
 
 signal player_spawned
 
-var player: Character
-var player_hud: PlayerHUD
+var player: Character = null
+var player_hud: PlayerHUD = null
 
 var _main_game: MainGame = null
 
