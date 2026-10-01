@@ -7,6 +7,8 @@ func physics_update(delta: float) -> void:
 		target_velocity.y -= character.stats.current_fall_acceleration * delta
 	
 	if direction != Vector3.ZERO:
+		if character.camera:
+			direction = direction.rotated(Vector3.UP, character.camera.global_rotation.y)
 		var target_basis: Basis = Basis.looking_at(direction, Vector3.UP, true)
 		character.character_scene.basis = character.character_scene.basis.slerp(target_basis, delta * 10.0)
 	
@@ -17,6 +19,9 @@ func physics_update(delta: float) -> void:
 	character.velocity = target_velocity
 	@warning_ignore("return_value_discarded")
 	character.move_and_slide()
+	
+	if not character_controller:
+		return
 	
 	direction = character_controller.get_movement_direction()
 	
@@ -29,6 +34,9 @@ func physics_update(delta: float) -> void:
 
 @warning_ignore("inferred_declaration")
 func enter(_previous_state_path: String, _data := {}) -> void:
+	if not character_controller:
+		return
+	
 	direction = character_controller.get_movement_direction()
 	
 	@warning_ignore("unsafe_method_access")

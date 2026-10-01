@@ -7,6 +7,8 @@ func physics_update(delta: float) -> void:
 		target_velocity.y -= character.stats.current_fall_acceleration * delta
 	
 	if direction != Vector3.ZERO:
+		if character.camera:
+			direction = direction.rotated(Vector3.UP, character.camera.global_rotation.y)
 		var target_basis: Basis = Basis.looking_at(direction, Vector3.UP, true)
 		character.character_scene.basis = character.character_scene.basis.slerp(target_basis, delta * 10.0)
 	

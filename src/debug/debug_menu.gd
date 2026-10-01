@@ -3,10 +3,15 @@ extends Control
 @onready var pause_game: CheckButton
 @onready var fly_camera: CheckButton
 
+func _ready() -> void:
+	visible = false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_menu"):
 		visible = !visible
+		if visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_pause_game_toggled(toggled_on: bool) -> void:
 	get_tree().paused = !get_tree().paused

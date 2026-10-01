@@ -1,16 +1,17 @@
 class_name HealthBar
 extends TextureProgressBar
 
-func _ready() -> void:
-	visible = false
-	PlayerManager.player_spawned.connect(_on_player_spawned)
+## This needs to be set outside
+var character: Character
 
-func _on_player_spawned() -> void:
-	max_value = PlayerManager.player.stats.current_max_health
-	value = PlayerManager.player.stats.health
-	PlayerManager.player.stats.health_changed.connect(_on_health_changed)
-	visible = true
+func init() -> void:
+	if not character:
+		push_error("Please setup character property before running init()")
+		return
+	max_value = character.stats.current_max_health
+	value = character.stats.health
+	character.stats.health_changed.connect(_on_health_changed)
 
 func _on_health_changed() -> void:
-	max_value = PlayerManager.player.stats.current_max_health
-	value = PlayerManager.player.stats.health
+	max_value = character.stats.current_max_health
+	value = character.stats.health

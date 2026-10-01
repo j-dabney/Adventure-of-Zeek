@@ -6,5 +6,9 @@ const SCENE_UIDS: Dictionary = {
 	"enemy_scene_uid": "uid://v0iblyybygr4",
 	"pivot_camera_scene_uid": "uid://n6qttjbn3myu",
 	"fly_camera_scene_uid": "uid://dmrrn5lx66tvr",
-	"player_input_controller_script_uid": "uid://6uxkcnb0ddal"
+	"player_input_controller_script_uid": "uid://6uxkcnb0ddal",
+	"player_hud_scene_uid": "uid://12pipxasjfvy",
+	"loading_screen_uid": "uid://8et7mytmjxvu",
+	"debug_text_overlay_scene_uid": "uid://cgieyklyfiwfy",
+	"debug_menu_scene_uid": "uid://pymcrujtba88"
 }

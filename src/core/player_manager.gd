@@ -3,9 +3,16 @@ extends Node
 signal player_spawned
 
 var player: Character
-var player_input_controller: Node
+var player_hud: PlayerHUD
 
-func init() -> void:
+var _main_game: MainGame = null
+
+## Takes the Node representing the MainGame as an argument and caches it.
+## Assumes MainGame has a entity_root and hud_root.
+func init(main_game: MainGame) -> void:
+	_main_game = main_game
+	
+	# Setup Player and put in entity_root.
 	var player_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.player_scene_uid) as PackedScene
 	if player_scene == null:
 		push_error("Could not load player scene: " + SceneUIDs.SCENE_UIDS.player_scene_uid)
@@ -16,13 +23,34 @@ func init() -> void:
 		push_error("Loaded enemy scene does not extend character or DNE: " + SceneUIDs.SCENE_UIDS.player_scene_uid)
 		return
 	
-	if not RootNodes.entity_root:
+	if not _main_game.entity_root:
 		push_error("Main game has not yet been instantiated")
 		return
 	
-	RootNodes.entity_root.add_child(player)
+	_main_game.entity_root.add_child(player)
 	
-	player_input_controller = player.input_controller
+	# Setup Player HUD and put in hud_root.
+	var player_hud_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.player_hud_scene_uid) as PackedScene
+	if player_hud_scene == null:
+		push_error("Could not load player hud scene: " + SceneUIDs.SCENE_UIDS.player_hud_scene_uid)
+		return
+	
+	player_hud = player_hud_scene.instantiate() as PlayerHUD
+	if player_hud == null:
+		push_error("Loaded Player HUD scene does not extend PlayerHUD: " + SceneUIDs.SCENE_UIDS.player_hud_scene_uid)
+		return
+	
+	if not _main_game.hud_root:
+		push_error("Main game has not yet been instantiated")
+		return
+	
+	_main_game.hud_root.add_child(player_hud)
+	
+	# Player HUD health bar needs reference to Player
+	player_hud.health_bar.character = player
+	
+	# Player HUD shouldn't be visible until Player is in level
+	player_hud.visible = false
 
 ## Finds the default spawn location in currently loaded level, and places
 ## the Player at that position.
@@ -36,3 +64,6 @@ func place_player_at_level_spawn() -> void:
 	
 	player.global_position = LevelLoader.current_level.get_default_player_spawn()
 	player_spawned.emit()
+	
+	# Player HUD should be visible once Player spawns
+	player_hud.visible = true

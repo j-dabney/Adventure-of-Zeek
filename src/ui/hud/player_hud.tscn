@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ch360a2d0dipq" path="res://assets/visual/ui/healthbarUnder.png" id="1_1t7b1"]
 [ext_resource type="Script" uid="uid://cxvvy3qbdgch1" path="res://src/ui/hud/game_time.gd" id="1_3r42n"]
+[ext_resource type="Script" uid="uid://mwdaoto6q5yp" path="res://src/ui/hud/player_hud.gd" id="1_ud8na"]
 [ext_resource type="Texture2D" uid="uid://bqqmgl4ed0kse" path="res://assets/visual/ui/healthbarProgress.png" id="2_3d670"]
 [ext_resource type="Script" uid="uid://hl2nk2xlygtg" path="res://src/ui/hud/health_bar.gd" id="3_3d670"]
 
@@ -14,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
+script = ExtResource("1_ud8na")
 
 [node name="Time" type="MarginContainer" parent="." unique_id=891283]
 layout_mode = 1

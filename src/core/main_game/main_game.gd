@@ -19,16 +19,11 @@ var enemy: Character = null
 @onready var debug_root: Control = %DebugRoot
 
 func _ready() -> void:
-	RootNodes.level_root = level_root
-	RootNodes.entity_root = entity_root
-	RootNodes.effect_root = effect_root
-	RootNodes.hud_root = hud_root
-	RootNodes.pause_root = pause_root
-	RootNodes.transition_root = transition_root
-	RootNodes.debug_root = debug_root
-	PlayerManager.init()
+	DebugManager.init(self)
+	LevelLoader.init(self)
+	PlayerManager.init(self)
+	CameraManager.init(self)
 	_init_enemy()
-	CameraManager.init()
 	
 	await LevelLoader.load_level(SceneUIDs.SCENE_UIDS.test_level_01)
 	await LevelLoader.load_finished

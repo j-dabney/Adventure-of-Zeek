@@ -2,14 +2,13 @@ extends Node
 
 var current_camera: Node3D = null
 
-var _entity_root: Node3D = null
+var _main_game: MainGame = null
 
-func init() -> void:
-	if not RootNodes.entity_root:
-		push_error("Camera Manager was initalized before root nodes.")
-		return
-		
-	_entity_root = RootNodes.entity_root
+## Takes the Node representing the MainGame as an argument and caches it.
+## Assumes MainGame has an entity_root.
+## IMPORTANT: Must not be initialized before PlayerManager or LevelLoader
+func init(main_game: MainGame) -> void:
+	_main_game = main_game
 	
 	if not LevelLoader.current_level:
 		return
@@ -20,12 +19,12 @@ func init() -> void:
 	setup_player_camera()
 
 func setup_player_camera() -> void:
-	if not _entity_root or not LevelLoader.current_level or not PlayerManager.player:
+	if not _main_game.entity_root or not LevelLoader.current_level or not PlayerManager.player:
 		return
 	
 	if current_camera:
 		PlayerManager.player.camera = null
-		_entity_root.remove_child(current_camera)
+		_main_game.entity_root.remove_child(current_camera)
 		current_camera.queue_free()
 		current_camera = null
 	
@@ -36,26 +35,23 @@ func setup_player_camera() -> void:
 	
 	current_camera = camera_scene.instantiate() as PivotCamera
 	if current_camera == null:
-		push_error("Loaded camera scene does not extend BaseCamera: " + SceneUIDs.SCENE_UIDS.pivot_camera_scene_uid)
+		push_error("Loaded camera scene does not extend PivotCamera: " + SceneUIDs.SCENE_UIDS.pivot_camera_scene_uid)
 		return
 	
-	_entity_root.add_child(current_camera)
+	_main_game.entity_root.add_child(current_camera)
 	
 	@warning_ignore("unsafe_property_access")
 	current_camera.target = PlayerManager.player
 	PlayerManager.player.camera = current_camera
-	@warning_ignore("untyped_declaration")
-	var player_input_controller_script = load("res://src/gameplay/player/player_input_controller.gd")
-	PlayerManager.player.input_controller.set_script(player_input_controller_script)
-	PlayerManager.player.input_controller.character = PlayerManager.player
+	PlayerManager.player.input_controller.enabled = true
 
 func switch_to_debug_camera() -> void:
-	if not _entity_root or not LevelLoader.current_level:
+	if not _main_game.entity_root or not LevelLoader.current_level:
 		return
 	
 	if current_camera:
 		PlayerManager.player.camera = null
-		_entity_root.remove_child(current_camera)
+		_main_game.entity_root.remove_child(current_camera)
 		current_camera.queue_free()
 		current_camera = null
 	
@@ -69,6 +65,6 @@ func switch_to_debug_camera() -> void:
 		push_error("Loaded camera scene does not extend BaseCamera: " + SceneUIDs.SCENE_UIDS.fly_camera_scene_uid)
 		return
 	
-	_entity_root.add_child(current_camera)
+	_main_game.entity_root.add_child(current_camera)
 	
-	PlayerManager.player_input_controller.set_script(null)
+	PlayerManager.player.input_controller.enabled = false

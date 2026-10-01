@@ -5,24 +5,25 @@ signal load_finished
 
 var current_level: BaseLevel = null
 
-var loading_screen: PackedScene = preload("uid://8et7mytmjxvu")
+var loading_screen: PackedScene = preload(SceneUIDs.SCENE_UIDS.loading_screen_uid)
 var loaded_level: PackedScene
 var level_path: String
 var progress: Array = []
 var use_sub_threads: bool = true
 
-var _level_root: Node3D
-var _transition_root: Control
+var _main_game: MainGame = null
 
 func _ready() -> void:
 	set_process(false)
 
+## Takes the Node representing the MainGame as an argument and caches it.
+func init(main_game: MainGame) -> void:
+	_main_game = main_game
+
 func load_level(_level_path: String) -> void:
 	level_path = _level_path
 	
-	_level_root = RootNodes.level_root
-	_transition_root = RootNodes.transition_root
-	if not _level_root or not _transition_root:
+	if not _main_game.level_root or not _main_game.transition_root:
 		printerr("Main scene has not been initiated.")
 		return
 	
@@ -34,7 +35,7 @@ func load_level(_level_path: String) -> void:
 		printerr("New load screen is not of type LoadingScreen")
 		return
 	
-	_transition_root.add_child(new_load_screen)
+	_main_game.transition_root.add_child(new_load_screen)
 	@warning_ignore("return_value_discarded")
 	progress_changed.connect(new_load_screen._on_progress_changed)
 	@warning_ignore("return_value_discarded")
@@ -59,12 +60,12 @@ func _process(_delta: float) -> void:
 			loaded_level = ResourceLoader.load_threaded_get(level_path)
 			
 			if current_level:
-				_level_root.remove_child(current_level)
+				_main_game.level_root.remove_child(current_level)
 				current_level.queue_free()
 				current_level = null
 			
-			for child: Node in _level_root.get_children():
-				_level_root.remove_child(child)
+			for child: Node in _main_game.level_root.get_children():
+				_main_game.level_root.remove_child(child)
 				child.queue_free()
 			
 			var new_level: Node = loaded_level.instantiate()
@@ -82,6 +83,6 @@ func _process(_delta: float) -> void:
 			
 			current_level = new_level
 			
-			_level_root.add_child(current_level)
+			_main_game.level_root.add_child(current_level)
 			load_finished.emit()
 			set_process(false)
