@@ -22,11 +22,7 @@ func setup_player_camera() -> void:
 	if not _main_game.entity_root or not LevelLoader.current_level or not PlayerManager.player:
 		return
 	
-	if current_camera:
-		PlayerManager.player.camera = null
-		_main_game.entity_root.remove_child(current_camera)
-		current_camera.queue_free()
-		current_camera = null
+	cleanup()
 	
 	var camera_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.pivot_camera_scene_uid) as PackedScene
 	if camera_scene == null:
@@ -49,11 +45,7 @@ func switch_to_debug_camera() -> void:
 	if not _main_game.entity_root or not LevelLoader.current_level:
 		return
 	
-	if current_camera:
-		PlayerManager.player.camera = null
-		_main_game.entity_root.remove_child(current_camera)
-		current_camera.queue_free()
-		current_camera = null
+	cleanup()
 	
 	var camera_scene: PackedScene = ResourceLoader.load(SceneUIDs.SCENE_UIDS.fly_camera_scene_uid) as PackedScene
 	if camera_scene == null:
@@ -67,4 +59,13 @@ func switch_to_debug_camera() -> void:
 	
 	_main_game.entity_root.add_child(current_camera)
 	
-	PlayerManager.player.input_controller.enabled = false
+	if PlayerManager.player:
+		PlayerManager.player.input_controller.enabled = false
+
+func cleanup() -> void:
+	if current_camera:
+		if PlayerManager.player:
+			PlayerManager.player.camera = null
+		_main_game.entity_root.remove_child(current_camera)
+		current_camera.queue_free()
+		current_camera = null

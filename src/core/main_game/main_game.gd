@@ -17,24 +17,17 @@ extends Node
 func _ready() -> void:
 	DebugManager.init(self)
 	LevelLoader.init(self)
-	PlayerManager.init(self)
-	CameraManager.init(self)
-	EnemyManager.init(self)
+	GameManager.init(self)
 	
-	await LevelLoader.load_level(SceneUIDs.SCENE_UIDS.test_level_01)
-	await LevelLoader.load_finished
-	
-	PlayerManager.place_player_at_level_spawn()
-	CameraManager.setup_player_camera()
-	EnemyManager.place_enemy_at_level_spawn()
+	@warning_ignore("missing_await")
+	GameManager.start()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not OS.is_debug_build():
 		return
 	
 	if event.is_action_pressed(&"debug_quit"):
-		print_orphan_nodes()
-		quit_game()
+		GameManager.quit()
 
 func quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)

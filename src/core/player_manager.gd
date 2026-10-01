@@ -67,3 +67,14 @@ func place_player_at_level_spawn() -> void:
 	
 	# Player HUD should be visible once Player spawns
 	player_hud.visible = true
+
+func cleanup() -> void:
+	if player_hud:
+		_main_game.hud_root.remove_child(player_hud)
+		player_hud.queue_free()
+		player_hud = null
+	
+	if player:
+		_main_game.entity_root.remove_child(player)
+		player.queue_free()
+		player = null

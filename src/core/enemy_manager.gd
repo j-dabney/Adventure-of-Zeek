@@ -31,3 +31,9 @@ func place_enemy_at_level_spawn() -> void:
 	
 	enemy.global_position = LevelLoader.current_level.get_default_enemy_spawn()
 	(enemy.input_controller as AIInputController).target = PlayerManager.player
+
+func cleanup() -> void:
+	if enemy:
+		_main_game.entity_root.remove_child(enemy)
+		enemy.queue_free()
+		enemy = null

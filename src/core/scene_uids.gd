@@ -10,5 +10,6 @@ const SCENE_UIDS: Dictionary = {
 	"player_hud_scene_uid": "uid://12pipxasjfvy",
 	"loading_screen_uid": "uid://8et7mytmjxvu",
 	"debug_text_overlay_scene_uid": "uid://cgieyklyfiwfy",
-	"debug_menu_scene_uid": "uid://pymcrujtba88"
+	"debug_menu_scene_uid": "uid://pymcrujtba88",
+	"pause_menu_scene_uid": "uid://buipjc15gej6"
 }
