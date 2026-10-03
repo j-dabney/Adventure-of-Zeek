@@ -1,0 +1,18 @@
+# Don't remove the two lines below, they're required for gettext to work correctly.
+msgid ""
+msgstr ""
+
+# Example of a regular string.
+msgid "Hello world!"
+msgstr ""
+
+# Example of a string with pluralization.
+msgid "There is %d apple."
+msgid_plural "There are %d apples."
+msgstr[0] ""
+msgstr[1] ""
+
+# Example of a string with a translation context.
+msgctxt "Actions"
+msgid "Close"
+msgstr ""
